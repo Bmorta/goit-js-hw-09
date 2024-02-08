@@ -1,10 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 //DOM LINKS
-const formEl = document.querySelector('.form');
-const delayEl = document.querySelector('input[name="delay"]');
-const stepEl = document.querySelector('input[name="step"]');
-const amountEl = document.querySelector('input[name="amount"]');
+const formElmt = document.querySelector('.form');
+const delayElmt = document.querySelector('input[name="delay"]');
+const stepElmt = document.querySelector('input[name="step"]');
+const amountElmt = document.querySelector('input[name="amount"]');
 
 //-------------------------------------------------------------
 
@@ -29,9 +29,9 @@ function createPromise(position, delay) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  let delayValue = Number(delayEl.value);
+  let delayValue = Number(delayElmt.value);
 
-  for (let i = 1; i <= amountEl.value; i++) {
+  for (let i = 1; i <= amountElmt.value; i++) {
     createPromise(i, delayValue)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -40,9 +40,9 @@ function handleSubmit(event) {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
 
-    delayValue += Number(stepEl.value);
-    //delayvalue = delayvalue + Number(stepEl.value)
+    delayValue += Number(stepElmt.value);
+    //delayvalue = delayvalue + Number(stepElmt.value)
   }
 }
 
-formEl.addEventListener('submit', handleSubmit);
+formElmt.addEventListener('submit', handleSubmit);
